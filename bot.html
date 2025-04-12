@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swayam Travel Assist</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff5e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+    }
+
+    /* Chatbot Container */
+    .chatbot-container {
+      width: 300px;              /* Set the width of the chatbot */
+      height: 400px;             /* Set the height of the chatbot */
+      position: fixed;           /* Fixed position on the page */
+      bottom: 20px;              /* Place 20px from the bottom of the screen */
+      right: 20px;               /* Place 20px from the right side of the screen */
+      border-radius: 8px;        /* Rounded corners */
+      background-color: #ff7f50; /* Orange background */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+      padding: 15px;             /* Padding inside the chatbot */
+      display: none;             /* Initially hidden */
+      flex-direction: column;
+      justify-content: space-between; /* Distribute space */
+    }
+
+    /* Chatbot Header */
+    .chatbot-header {
+      background-color: #ff5722; /* Darker orange background for the header */
+      color: white;
+      padding: 8px;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    /* Chatbot body */
+    .chatbot-body {
+      flex-grow: 1;
+      overflow-y: auto;          /* Enable scrolling for overflow content */
+      padding: 5px;
+      background-color: #ffdab9; /* Light orange background for the chat area */
+      border-radius: 5px;
+    }
+
+    /* Chatbot messages */
+    .message {
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      border-radius: 20px;
+      max-width: 80%;
+      line-height: 1.4;
+    }
+
+    .user {
+      align-self: flex-end;
+      background-color: #ffe1c4;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background-color: #ffb07c;
+    }
+
+    /* Chatbot footer (input and button) */
+    .chatbot-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chatbot-footer input {
+      width: 70%;                /* Input field takes most of the space */
+      padding: 8px;
+      border: 1px solid #ffa07a;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .chatbot-footer button {
+      width: 25%;                /* Button takes smaller space */
+      padding: 8px;
+      background-color: #ff5722;  /* Darker orange button color */
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .chatbot-footer button:hover {
+      background-color: #e64a19;  /* Slightly darker orange on hover */
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Chatbot Container -->
+  <div class="chatbot-container" id="chatbot">
+    <!-- Chatbot Header -->
+    <div class="chatbot-header">Swayam Travel Guide</div>
+
+    <!-- Chatbot Body -->
+    <div class="chatbot-body" id="chatBox"></div>
+
+    <!-- Chatbot Footer -->
+    <div class="chatbot-footer">
+      <input type="text" id="userInput" placeholder="Ask me anything about travel..." />
+      <button onclick="handleUserInput()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatbot = document.getElementById("chatbot");
+    const chatBox = document.getElementById("chatBox");
+    const userInput = document.getElementById("userInput");
+
+    const knowledgeBase = {
+  "what are the best places to visit in india": "India offers diverse destinations: Taj Mahal (Agra), Jaipur (Rajasthan), Kerala backwaters, Leh-Ladakh, and Goa beaches.",
+  "best time to visit india": "October to March is ideal for most regions. Avoid monsoon (June–September) unless visiting hill stations.",
+  "top places to visit in north india": "Agra, Delhi, Varanasi, Amritsar, Shimla, and Leh-Ladakh are top picks.",
+  "top places to visit in south india": "Kerala, Hampi, Mysore, Ooty, Coorg, and Pondicherry are must-visits in South India.",
+  "places to visit in goa": "Visit Baga Beach, Fort Aguada, Basilica of Bom Jesus, Dudhsagar Falls, and enjoy water sports in Calangute.",
+  "places to visit in kerala": "Alleppey backwaters, Munnar tea gardens, Thekkady, Kovalam beach, and Wayanad.",
+  "famous places in rajasthan": "Jaipur (Pink City), Udaipur (City of Lakes), Jaisalmer (Golden City), and Mount Abu.",
+  "hill stations in india": "Shimla, Manali, Darjeeling, Ooty, Munnar, and Mussoorie are popular hill stations.",
+  "what to do in manali": "Enjoy snow sports at Solang Valley, visit Hadimba Temple, and shop at Mall Road.",
+  "famous temples in india": "Kashi Vishwanath (Varanasi), Meenakshi Temple (Madurai), Golden Temple (Amritsar), and Tirupati Temple.",
+  "wildlife sanctuaries in india": "Jim Corbett, Ranthambore, Kaziranga, Gir, and Periyar Wildlife Sanctuary.",
+  "how to reach leh ladakh": "You can reach via air to Leh Airport or by road from Manali or Srinagar (May to September).",
+  "what are the must-see places in varanasi": "Kashi Vishwanath Temple, Dashashwamedh Ghat, Ganga Aarti, and Sarnath.",
+  "what is special in andaman": "Scuba diving, Radhanagar Beach, Cellular Jail, and snorkeling in Havelock Island.",
+  "top attractions in delhi": "Red Fort, India Gate, Qutub Minar, Lotus Temple, and Chandni Chowk market.",
+  "things to do in mumbai": "Visit Gateway of India, Marine Drive, Elephanta Caves, and shop at Colaba Causeway.",
+  "what to explore in mysore": "Mysore Palace, Chamundi Hills, Brindavan Gardens, and local silk & sandalwood markets.",
+  "places to visit in tamil nadu": "Chennai, Madurai, Rameswaram, Kanyakumari, and hill stations like Ooty & Kodaikanal.",
+  "how to plan a trip to sikkim": "Visit Gangtok, Tsomgo Lake, Nathula Pass. Best time: March–June or October–December.",
+  "things to do in rishikesh": "Try river rafting, Ganga Aarti at Triveni Ghat, visit Beatles Ashram, and yoga retreats.",
+  "historical places in india": "Taj Mahal, Red Fort, Hampi ruins, Qutub Minar, Fatehpur Sikri, and Konark Sun Temple.",
+  "beaches in india": "Goa, Gokarna, Varkala, Andaman, Kovalam, and Marina Beach (Chennai).",
+  "offbeat places to visit in india": "Tawang (Arunachal), Ziro Valley, Spiti Valley, Gokarna, and Majuli Island.",
+  "famous food places in india": "Amritsar for kulchas, Delhi for chaat, Lucknow for kebabs, Hyderabad for biryani, and Kolkata for sweets.",
+  "what are romantic destinations in india": "Udaipur, Manali, Munnar, Andaman Islands, and Gulmarg.",
+  "places to visit in northeast india": "Shillong, Cherrapunji, Tawang, Kaziranga, Majuli, and Ziro Valley.",
+  "heritage sites in india": "Taj Mahal, Hampi, Mahabalipuram, Khajuraho, Ellora & Ajanta Caves, and Jaipur city.",
+  "best trekking places in india": "Roopkund, Valley of Flowers, Triund, Kedarkantha, and Hampta Pass.",
+  "cheap places to travel in india": "Rishikesh, Pushkar, McLeod Ganj, Hampi, and Varanasi are budget-friendly.",
+  "top waterfalls in india": "Dudhsagar (Goa), Jog Falls (Karnataka), Athirappilly (Kerala), and Nohkalikai (Meghalaya).",
+  
+  // New Queries
+  "best places to visit in agra": "Taj Mahal, Agra Fort, Fatehpur Sikri, and Mehtab Bagh are top attractions in Agra.",
+  "places to visit in delhi": "Red Fort, India Gate, Qutub Minar, Lotus Temple, and Chandni Chowk.",
+  "adventure activities in manali": "Paragliding, rafting in Beas River, trekking to Solang Valley, and zorbing are popular activities.",
+  "how to plan a trip to goa": "Book a flight or train, plan your beach days, visit the forts, and explore local markets.",
+  "romantic destinations in north india": "Agra, Udaipur, Nainital, and Mussoorie are perfect for couples.",
+  "offbeat places in himachal pradesh": "Spiti Valley, Tirthan Valley, Barot, and Kullu are less crowded gems.",
+  "best beaches in goa": "Baga, Anjuna, Palolem, and Calangute are the most popular beaches.",
+  "how to reach rishikesh": "Rishikesh is accessible by air (Dehradun), train (Haridwar), and road.",
+  "best time to visit rajasthan": "October to March, avoiding the hot summer months.",
+  "top tourist attractions in kolkata": "Victoria Memorial, Howrah Bridge, Marble Palace, and Kalighat Temple.",
+  "things to do in mumbai": "Visit Gateway of India, Elephanta Caves, Marine Drive, and chow down on street food.",
+  "romantic places in goa": "Palolem Beach, Baga Beach, and Fort Aguada are great romantic spots.",
+  "most visited places in india": "Taj Mahal, Qutub Minar, Red Fort, and Ajanta Caves.",
+  "top beaches in kerala": "Varkala, Kovalam, Alappuzha, and Munroe Island.",
+  "tourist spots in hyderabad": "Charminar, Golkonda Fort, Hussain Sagar, and Ramoji Film City.",
+  "best hill stations in himachal pradesh": "Shimla, Manali, Kullu, and Dharamshala.",
+  "adventure activities in uttarakhand": "Trekking, rafting, camping, and skiing are popular in Uttarakhand.",
+  "places to visit in udaipur": "Lake Pichola, City Palace, Sajjangarh Palace, and Jagdish Temple.",
+  "best places to visit in tamil nadu": "Madurai, Chennai, Kanyakumari, Ooty, and Rameswaram.",
+  "top places to visit in karnataka": "Bangalore, Coorg, Hampi, and Badami.",
+  "best trekking destinations in himachal pradesh": "Kheerganga, Triund, and Pin Parvati are top trekking spots.",
+  "best time to visit andaman islands": "November to May is ideal for clear skies and water activities.",
+  "how to reach leh ladakh by road": "Leh can be accessed by road from Manali and Srinagar, with an open season from May to September.",
+  "best time to visit kerala": "October to March is the best time to visit Kerala for a tropical experience.",
+  "famous hill stations in india": "Darjeeling, Ooty, Manali, Mussoorie, and Shimla are popular hill stations.",
+  "how to reach jaipur": "Jaipur is easily accessible by air, train, and road from major cities in India.",
+  "best places to visit in goa for families": "Anjuna Beach, Baga Beach, and the Aguada Fort are family-friendly spots.",
+  "adventure sports in goa": "Parasailing, windsurfing, and scuba diving are popular in Goa.",
+  "places to visit in north east india": "Tawang, Kaziranga, Shillong, and Majuli are must-visits in Northeast India.",
+  "how to plan a trip to manali": "You can travel by bus, taxi, or hire a self-drive car from Delhi to Manali.",
+  "best places to visit in punjab": "Amritsar (Golden Temple), Chandigarh, and Ludhiana.",
+  "famous wildlife sanctuaries in india": "Kaziranga, Gir, Sundarbans, and Jim Corbett.",
+  "best time to visit delhi": "The ideal time to visit Delhi is from October to March.",
+  "must-see places in kolkata": "Victoria Memorial, Howrah Bridge, Marble Palace, and Dakshineswar Temple.",
+  "places to visit in rajasthan": "Jaipur, Udaipur, Jaisalmer, and Jodhpur.",
+  "best beaches in tamil nadu": "Marina Beach, Kovalam Beach, and Mahabalipuram Beach.",
+  "top adventure activities in india": "Rafting in Rishikesh, trekking in Himachal, and scuba diving in Andaman.",
+  "places to visit in kerala with family": "Alleppey Backwaters, Munnar, and Thekkady.",
+  "tourist attractions in delhi": "Qutub Minar, Lotus Temple, India Gate, and Akshardham Temple.",
+  "how to reach goa": "You can travel to Goa by air (Dabolim Airport), train (Margao), or bus.",
+  "places to visit in andhra pradesh": "Tirupati, Visakhapatnam, Araku Valley, and Puttaparthi.",
+  "best places to visit in uttarakhand": "Nainital, Rishikesh, Haridwar, and Mussoorie.",
+  "famous forts in india": "Red Fort (Delhi), Mehrangarh Fort (Jodhpur), and Chittorgarh Fort (Rajasthan).",
+  "adventure activities in leh ladakh": "Biking, trekking, and river rafting are popular in Leh Ladakh.",
+  "how to reach udaipur": "Udaipur is accessible by air (Maharana Pratap Airport), train, and road.",
+  "best time to visit manali": "October to March is the best time for snowfall and winter sports in Manali.",
+  "romantic places in india": "Udaipur, Manali, Gulmarg, and Andaman Islands.",
+  "famous temples in tamil nadu": "Meenakshi Temple, Brihadeeswarar Temple, and Ramanathaswamy Temple.",
+  "places to visit in uttarakhand": "Nainital, Rishikesh, Haridwar, and Auli.",
+  "top waterfalls in south india": "Athirappilly (Kerala), Hogenakkal (Tamil Nadu), and Pykara (Ooty).",
+  "best time to visit goa": "November to March is the best time for a beach vacation.",
+  "how to reach sikkim": "Sikkim is best reached via train to New Jalpaiguri or by air to Bagdogra Airport.",
+  "things to do in delhi": "Explore historical monuments, shopping at Connaught Place, visit gardens, and enjoy local food.",
+  "best honeymoon destinations in india": "Kerala, Andaman, Udaipur, and Shimla.",
+  "popular trekking routes in india": "Kedarkantha, Roopkund, and the Valley of Flowers.",
+  "best places to visit in maharashtra": "Mumbai, Pune, Lonavala, and Aurangabad.",
+  "adventure destinations in india": "Leh Ladakh, Rishikesh, Manali, and Coorg.",
+  "how to reach kodaikanal": "Kodaikanal is accessible by road from Madurai, the nearest major city.",
+  "top travel destinations":"Karnataka,Kerala,Madya Pradesh,Tanmil Nadu,Andra Prasesh"
+
+};
+    function addMessage(content, sender) {
+      const message = document.createElement("div");
+      message.className = `message ${sender}`;
+      message.textContent = content;
+      chatBox.appendChild(message);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function handleUserInput() {
+      const input = userInput.value.trim().toLowerCase();
+      if (input === "") return;
+      addMessage(input, "user");
+
+      let response = "I'm not sure about that. Can you try asking differently?";
+      for (let key in knowledgeBase) {
+        if (input.includes(key)) {
+          response = knowledgeBase[key];
+          break;
+        }
+      }
+
+      setTimeout(() => addMessage(response, "bot"), 600);
+      userInput.value = "";
+    }
+
+    userInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        handleUserInput();
+      }
+    });
+
+    // Show chatbot after 5 seconds
+    setTimeout(() => {
+      chatbot.style.display = 'flex';  // Make the chatbot visible
+    }, 5000);  // 5 seconds delay
+  </script>
+
+</body>
+</html>

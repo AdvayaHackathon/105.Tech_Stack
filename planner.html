@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plan Your Cultural Journey</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f6f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #fffbe6;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar h1 {
+      color: #e67e22;
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    .account-btn {
+      background-color: #e67e22;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .planner {
+      max-width: 800px;
+      margin: 3rem auto;
+      text-align: center;
+    }
+
+    .step-box {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .step {
+      background-color: #ddd;
+      color: white;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    .step.active {
+      background-color: #e67e22;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .checkbox-grid label,
+    .radio-options label {
+      display: block;
+      background: #f4f4f4;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.3s;
+    }
+
+    .checkbox-grid label:hover,
+    .radio-options label:hover {
+      border-color: #e67e22;
+    }
+
+    .radio-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left;
+      margin: 2rem 0;
+    }
+
+    .radio-options label input {
+      margin-right: 10px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .continue-btn,
+    .back-btn {
+      text-decoration: none;
+      background-color: #e67e22;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .back-btn {
+      background-color: #ccc;
+    }
+
+    .continue-btn:hover,
+    .back-btn:hover {
+      background-color: #d35400;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <h1>Cultura Guide</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Explore</a>
+        <a href="#">Trip Planner</a>
+        ><a href="F:\Kuidu\Advaya\bot.html">AI Guide</a>
+        <a href="F:\Kuidu\Advaya\maps.html">Nearby</a>
+        <a href="F:\Kuidu\Advaya\planner.html">Book</a
+        <button class="account-btn">Account</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="planner">
+    <h2>Plan Your Cultural Journey</h2>
+    <p>Tell us your preferences, and our AI will craft a personalized cultural itinerary just for you.</p>
+
+    <div class="step-box">
+      <div class="steps">
+        <div class="step active">1</div>
+        <div class="step">2</div>
+        <div class="step">3</div>
+        <div class="step">4</div>
+      </div>
+      <h3>Where would you like to explore?</h3>
+      <p>Select up to 3 destinations that interest you.</p>
+      <div class="checkbox-grid">
+        <label><input type="checkbox" /> Japan</label>
+        <label><input type="checkbox" /> Italy</label>
+        <label><input type="checkbox" /> Morocco</label>
+        <label><input type="checkbox" /> Peru</label>
+        <label><input type="checkbox" /> India</label>
+        <label><input type="checkbox" /> Egypt</label>
+        <label><input type="checkbox" /> Turkey</label>
+        <label><input type="checkbox" /> Greece</label>
+      </div>
+      <a href="duration.html" class="continue-btn">Continue →</a>
+    </div>
+  </main>
+</body>
+</html>

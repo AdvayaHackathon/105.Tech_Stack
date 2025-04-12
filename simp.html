@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cultural Trip Booking</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      background-color: #f0f6f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #1c1c1c;
+    }
+
+    p {
+      color: #555;
+      margin-top: 0.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .booking-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .stepper {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .step {
+      text-align: center;
+      flex: 1;
+      position: relative;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .step::after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: #ddd;
+      top: 15px;
+      left: 50%;
+      z-index: -1;
+    }
+
+    .step:first-child::after {
+      display: none;
+    }
+
+    .step.active {
+      color: #1c1c1c;
+      font-weight: bold;
+    }
+
+    .step-circle {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      background-color: #3d4e2c;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-section {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f0;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      background-color: #3d4e2c;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #2e3a22;
+    }
+
+    .step-content {
+      display: none;
+    }
+
+    .step-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Book Your Cultural Experience</h1>
+  <p>Secure your spot for an authentic cultural journey through our easy booking process.</p>
+
+  <div class="booking-card">
+    <div class="stepper">
+      <div class="step active" onclick="showStep(0)">
+        <div class="step-circle">1</div>
+        <div>Trip Details</div>
+      </div>
+      <div class="step" onclick="showStep(1)">
+        <div class="step-circle">2</div>
+        <div>Add-ons</div>
+      </div>
+      <div class="step" onclick="showStep(2)">
+        <div class="step-circle">3</div>
+        <div>Payment</div>
+      </div>
+    </div>
+
+    <!-- Step 1: Trip Details -->
+    <div class="step-content active">
+      <div class="form-section">
+        <label for="destination">Destination</label>
+        <select id="destination">
+          <option>Select destination</option>
+          <option>Italy</option>
+          <option>Japan</option>
+          <option>India</option>
+          <option>Peru</option>
+        </select>
+      </div>
+
+      <div class="form-section input-group">
+        <div style="flex: 1;">
+          <label for="start-date">Start Date</label>
+          <input type="date" id="start-date" />
+        </div>
+        <div style="flex: 1;">
+          <label for="end-date">End Date</label>
+          <input type="date" id="end-date" />
+        </div>
+      </div>
+
+      <div class="form-section">
+        <label for="group-size">Group Size</label>
+        <input type="number" id="group-size" value="2" min="1"/>
+      </div>
+
+      <button class="btn" onclick="showStep(1)">Continue to Add-ons</button>
+    </div>
+
+    <!-- Step 2: Add-ons -->
+    <div class="step-content">
+      <div class="form-section">
+        <label><input type="checkbox" /> Guided City Tour</label>
+        <label><input type="checkbox" /> Cultural Dance Show</label>
+        <label><input type="checkbox" /> Local Food Tasting</label>
+      </div>
+      <button class="btn" onclick="showStep(2)">Continue to Payment</button>
+    </div>
+
+    <!-- Step 3: Payment -->
+    <div class="step-content">
+      <div class="form-section">
+        <label for="card">Card Number</label>
+        <input type="text" id="card" placeholder="1234 5678 9012 3456"/>
+      </div>
+      <div class="input-group">
+        <div style="flex: 1;">
+          <label for="expiry">Expiry</label>
+          <input type="text" id="expiry" placeholder="MM/YY"/>
+        </div>
+        <div style="flex: 1;">
+          <label for="cvv">CVV</label>
+          <input type="password" id="cvv" placeholder="***"/>
+        </div>
+      </div>
+      <button class="btn">Complete Booking</button>
+    </div>
+  </div>
+
+  <script>
+    function showStep(index) {
+      const steps = document.querySelectorAll('.step');
+      const contents = document.querySelectorAll('.step-content');
+
+      steps.forEach((step, i) => {
+        step.classList.toggle('active', i === index);
+        contents[i].classList.toggle('active', i === index);
+      });
+    }
+  </script>
+</body>
+</html>

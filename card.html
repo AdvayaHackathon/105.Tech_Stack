@@ -1,0 +1,261 @@
+<!-- Full updated Cultura Guide HTML with background images and FAQ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cultura Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #f0f8ff;
+      transition: background-color 0.3s, color 0.3s;
+      color: #333;
+    }
+    .dark-mode {
+      background-color: #1c1f26;
+      color: #f9f9f9;
+    }
+
+    /* Slideshow background */
+    .bg-slider {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      animation: slide 30s infinite ease-in-out;
+    }
+
+    @keyframes slide {
+      0%, 100% { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQAudOk1Z4SsENi9WfB2rQeepH-7YyWdcbMg&s'); }
+      20% { background-image: url('https://th-thumbnailer.cdn-si-edu.com/KclowVjVtgy4uX2kpLxW2bgCaag=/fit-in/1200x0/filters:focal(1471x1061:1472x1062)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg'); }
+      40% { background-image: url('https://media.digitalnomads.world/wp-content/uploads/2021/01/20120709/bali-for-digital-nomads.jpg'); }
+      60% { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVCku9AgZcvl2dTBNM9tr3d75236prGKl8sg&s'); }
+      80% { background-image: url('https://static.wixstatic.com/media/nsplsh_616c59365f4f7064775251~mv2.jpg/v1/fill/w_2500,h_1667,al_c/nsplsh_616c59365f4f7064775251~mv2.jpg'); }
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.5rem;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+    }
+    .dark-mode header {
+      background-color: #2c2f36;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #006994;
+    }
+    .dark-mode .logo {
+      color: #add8e6;
+    }
+    .logo i {
+      margin-right: 8px;
+      color: #ffa500;
+      font-size: 1.2rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #006994;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .dark-mode nav ul li a {
+      color: #add8e6;
+    }
+    nav ul li a:hover {
+      color: #ffa500;
+    }
+    .auth {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .toggle-btn {
+      cursor: pointer;
+      font-size: 1rem;
+      color: #006994;
+    }
+    .dark-mode .toggle-btn {
+      color: #add8e6;
+    }
+    .btn {
+      padding: 0.4rem 0.8rem;
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .btn:hover {
+      background-color: #ff8c00;
+    }
+
+    /* FAQ Styles */
+    .faq-item {
+      border-bottom: 1px solid #ddd;
+      padding: 1rem 0;
+    }
+    .faq-question {
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .faq-answer {
+      display: none;
+      margin-top: 0.5rem;
+      color: #555;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-globe-asia"></i> Culture Guide
+    </div>
+    <nav>
+      <ul>
+        <li><a href="F:\Kuidu\Advaya\card.html">Home</a></li>
+        <li><a href="F:\Kuidu\Advaya\body.html">Explore</a></li>
+        <li><a href="F:\Kuidu\Advaya\planner.html">Trip Planner</a></li>
+        <li><a href="F:\Kuidu\Advaya\bot.html">AI Guide</a></li>
+        <li><a href="F:\Kuidu\Advaya\maps.html">Nearby</a></li>
+        <li><a href="F:\Kuidu\Advaya\planner.html">Book</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="auth">
+      <span class="toggle-btn" onclick="toggleDarkMode()">
+        <i class="fas fa-adjust"></i>
+      </span>
+      <a href="F:\Kuidu\Advaya\sign.html" class="btn">Login</a>
+      <a href="F:\Kuidu\Advaya\sign.html" class="btn">Signup</a>
+    </div>
+  </header>
+
+  <!-- Hero Section with Slideshow Background -->
+  <div id="home" class="bg-slider flex items-center justify-center text-white text-center">
+    <div class="bg-black bg-opacity-40 p-10 rounded">
+      <h2 class="text-4xl font-bold mb-4">Welcome to Cultura Guide 🌍</h2>
+      <p class="text-lg max-w-xl mx-auto">Explore culture through AI-powered insights and travel recommendations.</p>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="bg-white py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-blue-900 mb-8">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question">What is Cultura Guide?</div>
+        <div class="faq-answer">Cultura Guide is an AI-powered platform that helps travelers explore global cultures with personalized recommendations.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Is Cultura Guide free to use?</div>
+        <div class="faq-answer">Yes, you can explore features for free. Some premium experiences may require booking fees.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How do I plan a trip?</div>
+        <div class="faq-answer">Use our Trip Planner tool to select destinations, durations, budgets, and travel styles.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Can I find nearby attractions?</div>
+        <div class="faq-answer">Yes! Use the Nearby feature to explore cultural spots close to your current location.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#0c1a27] text-white px-6 py-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-yellow-400 text-xl">🌐</span>
+          <h2 class="text-lg font-semibold">Cultura Guide</h2>
+        </div>
+        <p class="text-sm text-gray-400 mb-4">Where culture meets technology. Discover the world’s cultural treasures with your AI-powered travel companion.</p>
+        <div class="flex gap-3 text-gray-400 text-xl">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold mb-3">Explore</h3>
+        <ul class="text-sm text-gray-400 space-y-2">
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Trip Planner</a></li>
+          <li><a href="#">AI Cultural Guide</a></li>
+          <li><a href="#">Nearby Attractions</a></li>
+          <li><a href="#">Book Experiences</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold mb-3">About</h3>
+        <ul class="text-sm text-gray-400 space-y-2">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold mb-3">Support</h3>
+        <ul class="text-sm text-gray-400 space-y-2">
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-gray-500 text-sm mt-8">
+      &copy; 2025 Cultura Guide. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- JavaScript for Dark Mode and FAQ toggle -->
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        question.parentElement.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

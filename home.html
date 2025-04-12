@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CULTURAL GUIDE</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cultura Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #f0f8ff;
+      transition: background-color 0.3s, color 0.3s;
+      color: #333;
+    }
+    .dark-mode {
+      background-color: #1c1f26;
+      color: #f9f9f9;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.5rem;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .dark-mode header {
+      background-color: #2c2f36;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #006994;
+    }
+    .dark-mode .logo {
+      color: #add8e6;
+    }
+    .logo i {
+      margin-right: 8px;
+      color: #ffa500;
+      font-size: 1.2rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #006994;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .dark-mode nav ul li a {
+      color: #add8e6;
+    }
+    nav ul li a:hover {
+      color: #ffa500;
+    }
+    .auth {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .toggle-btn {
+      cursor: pointer;
+      font-size: 1rem;
+      color: #006994;
+    }
+    .dark-mode .toggle-btn {
+      color: #add8e6;
+    }
+    .btn {
+      padding: 0.4rem 0.8rem;
+      background-color: #ffa500;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .btn:hover {
+      background-color: #ff8c00;
+    }
+    footer a:hover {
+      color: #ffa500;
+    }
+    .carousel.pointer-event {
+    touch-action: pan-y;
+    }
+    .carousel {
+    margin-bottom: 4rem;
+    position: relative;
+    }
+    .carousel.pointer-event {
+    touch-action: pan-y;
+}
+.carousel {
+    margin-bottom: 4rem;
+}
+.carousel {
+    position: relative;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+    unicode-bidi: isolate;
+}
+    
+
+  </style>
+  <!-- Swiper CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-globe-asia"></i> Culture Guide
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#explore">Explore</a></li>
+        <li><a href="#trip">Trip Planner</a></li>
+        <li><a href="#ai">AI Guide</a></li>
+        <li><a href="#nearby">Nearby</a></li>
+        <li><a href="#book">Book</a></li>
+      </ul>
+    </nav>
+    <div class="auth">
+      <span class="toggle-btn" onclick="toggleDarkMode()">
+        <i class="fas fa-adjust"></i>
+      </span>
+      <a href="#login" class="btn">Login</a>
+      <a href="#signup" class="btn">Signup</a>
+    </div>
+  </header>
+  <div id="myCarousel" class="carousel slide mb-6 pointer-event" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>Example headline.</h1>
+            <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
+            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Another example headline.</h1>
+            <p>Some representative placeholder content for the second slide of the carousel.</p>
+            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption text-end">
+            <h1>One more for good measure.</h1>
+            <p>Some representative placeholder content for the third slide of this carousel.</p>
+            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  
+
+  
+ 
+  <!-- Footer -->
+  <footer class="bg-[#0c1a27] text-white px-6 py-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      
+      <!-- Brand Section -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-yellow-400 text-xl">🌐</span>
+          <h2 class="text-lg font-semibold">Cultura Guide</h2>
+        </div>
+        <p class="text-sm text-gray-400 mb-4">Where culture meets technology. Discover the world’s cultural treasures with your AI-powered travel companion.</p>
+        <div class="flex gap-3 text-gray-400 text-xl">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <!-- Explore Links -->
+      <div>
+        <h3 class="text-white font-semibold mb-3">Explore</h3>
+        <ul class="text-sm text-gray-400 space-y-2">
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Trip Planner</a></li>
+          <li><a href="#">AI Cultural Guide</a></li>
+          <li><a href="#">Nearby Attractions</a></li>
+          <li><a href="#">Book Experiences</a></li>
+        </ul>
+      </div>
+
+      <!-- About Links -->
+      <div>
+        <h3 class="text-white font-semibold mb-3">About</h3>
+        <ul class="text-sm text-gray-400 space-y-2">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+        </ul>
+      </div>
+
+      <!-- Support Links -->
+      <div>
+        <h3 class="text-white font-semibold mb-3">Support</h3>
+        <ul class="text-sm text-gray-400 space-y-2">
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Feedback</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="text-center text-gray-500 text-sm mt-8">
+      &copy; 2025 Cultura Guide. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- JavaScript for Dark Mode -->
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+    
+  </script>
+</body>
+</html>
+</body>
+</html>

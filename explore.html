@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding: 20px;
+            max-width: 90vw;
+        }
+
+        .card {
+            flex: 0 0 300px;
+            background: linear-gradient(145deg, #1e1e1e, #292929);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .slider-container .card:not(:hover) {
+            opacity: 0.7;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .card p {
+            font-size: 0.9em;
+            color: #bbb;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 10px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            background: #e65c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container" id="slider">
+        <div class="card">
+            <h3>Article 1</h3>
+            <p>Functions in CSS</p>
+        </div>
+        <div class="card">
+            <h3>Article 2</h3>
+            <p>Revisiting CSS Multi-Column Layout</p>
+        </div>
+        <div class="card">
+            <h3>Article 3</h3>
+            <p>Toe Dipping Into Transitions</p>
+        </div>
+        <div class="card">
+            <h3>Article 4</h3>
+            <p>The What If Machine: Bringing CSS into the Picture</p>
+        </div>
+    </div>
+
+    <div class="slider-controls">
+        <button class="btn" o
